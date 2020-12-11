@@ -1,0 +1,27 @@
+service: 
+  name: turf-services
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  prune:
+    automatic: true
+    number: 3
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-prune-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  clusterPoints:
+    handler: src/handler.clusterPoints
+    events:
+      - http:
+          method: any
+          path: clusterPoints
